@@ -68,4 +68,8 @@ dependencies {
     // coil
     implementation(libs.coil3.coil.compose)
     implementation(libs.coil.network.okhttp)
+
+    // koin
+    implementation (libs.koin.android)
+    implementation (libs.koin.androidx.compose)
 }

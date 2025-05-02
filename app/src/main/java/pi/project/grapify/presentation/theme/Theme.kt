@@ -1,4 +1,4 @@
-package pi.project.grapify.presentation.ui.theme
+package pi.project.grapify.presentation.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
