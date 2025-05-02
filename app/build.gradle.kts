@@ -84,6 +84,4 @@ dependencies {
     implementation (libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
     kapt(libs.hilt.android.compiler)
-
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 }
