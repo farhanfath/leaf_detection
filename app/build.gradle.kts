@@ -84,4 +84,12 @@ dependencies {
     implementation (libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
     kapt(libs.hilt.android.compiler)
+
+    // CameraX
+    implementation ("androidx.camera:camera-camera2:1.4.2")
+    implementation ("androidx.camera:camera-lifecycle:1.4.2")
+    implementation ("androidx.camera:camera-view:1.4.2")
+
+// Permissions
+    implementation ("com.google.accompanist:accompanist-permissions:0.30.1")
 }
