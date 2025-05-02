@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt.android) // hilt
+    alias(libs.plugins.kotlin.kapt) // kapt
 }
 
 android {
@@ -60,16 +62,28 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // tf lite
-    implementation(libs.tensorflow.lite.task.vision)
-    implementation(libs.tensorflow.lite)
-    implementation(libs.tensorflow.lite.support)
-    implementation(libs.tensorflow.lite.metadata)
+//    implementation(libs.tensorflow.lite.task.vision)
+//    implementation(libs.tensorflow.lite)
+//    implementation(libs.tensorflow.lite.support)
+//    implementation(libs.tensorflow.lite.metadata)
+
+    // viewmodel
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // litert
+    implementation(libs.litert)
+    implementation(libs.litert.support)
+    implementation(libs.litert.metadata)
 
     // coil
     implementation(libs.coil3.coil.compose)
     implementation(libs.coil.network.okhttp)
 
     // koin
-    implementation (libs.koin.android)
-    implementation (libs.koin.androidx.compose)
+    implementation(libs.hilt.android)
+    implementation (libs.androidx.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
+    kapt(libs.hilt.android.compiler)
+
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 }

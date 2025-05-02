@@ -10,8 +10,9 @@ import pi.project.grapify.ml.GrapeleafdiseaseModel
 import java.io.FileInputStream
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
+import javax.inject.Inject
 
-class TFLiteModelAnalyzer(
+class TFLiteModelAnalyzer @Inject constructor(
     private val context: Context
 ) : ModelAnalyzer {
     override fun runInference(inputBuffer: ByteBuffer): FloatArray {

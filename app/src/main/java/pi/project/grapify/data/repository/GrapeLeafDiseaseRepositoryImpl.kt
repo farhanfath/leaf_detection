@@ -8,8 +8,9 @@ import pi.project.grapify.data.model.PredictionResult
 import pi.project.grapify.domain.service.ImageProcessor
 import pi.project.grapify.domain.service.ModelAnalyzer
 import pi.project.grapify.domain.util.Constants
+import javax.inject.Inject
 
-class GrapeLeafDiseaseRepositoryImpl(
+class GrapeLeafDiseaseRepositoryImpl @Inject constructor(
     private val context: Context,
     private val imageProcessor: ImageProcessor,
     private val modelAnalyzer: ModelAnalyzer

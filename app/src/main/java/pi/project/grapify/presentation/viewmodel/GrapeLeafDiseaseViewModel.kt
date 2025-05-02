@@ -3,16 +3,18 @@ package pi.project.grapify.presentation.viewmodel
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import pi.project.grapify.data.model.ClassPrediction
 import pi.project.grapify.data.repository.GrapeLeafDiseaseRepository
 import pi.project.grapify.domain.util.Constants
 import pi.project.grapify.presentation.state.UiState
 import java.util.Locale
+import javax.inject.Inject
 
-class GrapeLeafDiseaseViewModel(
+@HiltViewModel
+class GrapeLeafDiseaseViewModel @Inject constructor(
     private val repository: GrapeLeafDiseaseRepository
 ) : ViewModel() {
 

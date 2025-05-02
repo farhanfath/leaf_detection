@@ -29,7 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import org.koin.androidx.compose.koinViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import pi.project.grapify.presentation.components.ErrorMessage
 import pi.project.grapify.presentation.components.ResultCard
 import pi.project.grapify.presentation.state.UiState
@@ -37,7 +37,7 @@ import pi.project.grapify.presentation.viewmodel.GrapeLeafDiseaseViewModel
 
 @Composable
 fun GrapeLeafDiseaseDetectionScreen(
-    viewModel: GrapeLeafDiseaseViewModel = koinViewModel()
+    viewModel: GrapeLeafDiseaseViewModel = hiltViewModel<GrapeLeafDiseaseViewModel>()
 ) {
     val context = LocalContext.current
     var selectedImageUri by remember { mutableStateOf<Uri?>(null) }

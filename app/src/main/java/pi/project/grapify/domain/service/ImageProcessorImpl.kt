@@ -5,8 +5,9 @@ import android.util.Log
 import pi.project.grapify.domain.util.Constants
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import javax.inject.Inject
 
-class ImageProcessorImpl: ImageProcessor {
+class ImageProcessorImpl @Inject constructor(): ImageProcessor {
     override fun preProcessImage(bitmap: Bitmap): ByteBuffer {
         val inputSize = Constants.INPUT_SIZE
         val byteBuffer = ByteBuffer.allocateDirect(4 * inputSize * inputSize * 3)
