@@ -1,4 +1,4 @@
-package pi.project.grapify.presentation.ui.theme
+package pi.project.grapify.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

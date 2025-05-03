@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt.android) // hilt
+    alias(libs.plugins.kotlin.kapt) // kapt
 }
 
 android {
@@ -65,6 +67,9 @@ dependencies {
 //    implementation(libs.tensorflow.lite.support)
 //    implementation(libs.tensorflow.lite.metadata)
 
+    // viewmodel
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
     // litert
     implementation(libs.litert)
     implementation(libs.litert.support)
@@ -73,4 +78,18 @@ dependencies {
     // coil
     implementation(libs.coil3.coil.compose)
     implementation(libs.coil.network.okhttp)
+
+    // koin
+    implementation(libs.hilt.android)
+    implementation (libs.androidx.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
+    kapt(libs.hilt.android.compiler)
+
+    // CameraX
+    implementation ("androidx.camera:camera-camera2:1.4.2")
+    implementation ("androidx.camera:camera-lifecycle:1.4.2")
+    implementation ("androidx.camera:camera-view:1.4.2")
+
+// Permissions
+    implementation ("com.google.accompanist:accompanist-permissions:0.30.1")
 }
