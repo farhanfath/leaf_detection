@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import dagger.hilt.android.AndroidEntryPoint
 import pi.project.grapify.presentation.screens.GrapeLeafDiseaseDetectionScreen
+import pi.project.grapify.presentation.screens.SampleScreen
 import pi.project.grapify.presentation.theme.GrapifyTheme
 
 @AndroidEntryPoint
@@ -15,7 +16,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GrapifyTheme {
-                GrapeLeafDiseaseDetectionScreen()
+//                GrapeLeafDiseaseDetectionScreen()
+                SampleScreen()
             }
         }
     }

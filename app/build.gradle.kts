@@ -86,10 +86,15 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
     // CameraX
-    implementation ("androidx.camera:camera-camera2:1.4.2")
-    implementation ("androidx.camera:camera-lifecycle:1.4.2")
-    implementation ("androidx.camera:camera-view:1.4.2")
+    implementation("androidx.camera:camera-core:1.4.2")
+    implementation("androidx.camera:camera-camera2:1.4.2")
+    implementation("androidx.camera:camera-lifecycle:1.4.2")
+    implementation("androidx.camera:camera-view:1.4.2")
+    implementation("androidx.camera:camera-extensions:1.4.2")
 
-// Permissions
+    // Permissions
     implementation ("com.google.accompanist:accompanist-permissions:0.30.1")
+
+    // icons
+    implementation(libs.androidx.material.icons.extended)
 }
