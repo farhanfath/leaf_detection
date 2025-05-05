@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import pi.project.grapify.data.repository.GrapeLeafDiseaseRepository
 import pi.project.grapify.domain.util.Constants
@@ -19,7 +20,7 @@ class GrapeLeafDiseaseViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
-    val uiState: StateFlow<UiState> = _uiState
+    val uiState= _uiState.asStateFlow()
 
     private val _showRawOutput = MutableStateFlow(false)
     val showRawOutput: StateFlow<Boolean> = _showRawOutput

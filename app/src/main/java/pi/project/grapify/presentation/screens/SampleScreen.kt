@@ -267,7 +267,8 @@ fun CameraView(
     }
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         IconButton(
             onClick = onClose,
