@@ -2,8 +2,6 @@ package pi.project.grapify.domain.util
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import pi.project.grapify.data.model.DiseaseInfo
 
@@ -26,13 +24,13 @@ fun getDiseaseInfo(diseaseName: String): DiseaseInfo? {
         )
         "Grape Healthy" -> DiseaseInfo(
             penyebab = "Daun anggur sehat tidak terinfeksi oleh patogen penyebab penyakit.",
-            gejala = "Daun anggur sehat memiliki warna hijau yang konsisten, struktur yang utuh tanpa bercak atau bintik-bintik abnormal. Daun terlihat segar dengan pembuluh yang tersusun baik dan tidak ada tanda-tanda pengeringan atau perubahan warna.",
-            pencegahan = "• Melakukan perawatan kebun secara teratur.\n• Memastikan nutrisi tanah yang seimbang.\n• Melakukan pemangkasan secara teratur untuk sirkulasi udara yang baik.\n• Menjaga irigasi yang tepat dan menghindari kelebihan air.\n• Melakukan rotasi tanaman dan sanitasi kebun yang baik.\n• Pemantauan hama dan penyakit secara berkala.\n• Menggunakan varietas anggur yang tahan terhadap penyakit umum di daerah tersebut."
+            gejala = "Kondisi daun anggur terlihat normal dan tidak menunjukan tanda-tanda penyakit.",
+            pencegahan = "• Lanjutkan perawatan rutin seperti penyiraman, pemangkasan, dan pemupukan.\n • Tetap pantau kondisi secara berkala. \n• Memastikan nutrisi tanah yang seimbang.\n• Melakukan pemangkasan secara teratur untuk sirkulasi udara yang baik.\n• Menjaga irigasi yang tepat dan menghindari kelebihan air.\n• Melakukan rotasi tanaman dan sanitasi kebun yang baik.\n• Pemantauan hama dan penyakit secara berkala.\n• Menggunakan varietas anggur yang tahan terhadap penyakit umum di daerah tersebut."
         )
         "Not Anggur" -> DiseaseInfo(
             penyebab = "Gambar yang diunggah bukan daun anggur atau tidak dapat diidentifikasi sebagai daun anggur.",
             gejala = "Tidak relevan karena bukan daun anggur.",
-            pencegahan = "Silakan unggah gambar daun anggur untuk mendapatkan hasil deteksi yang akurat."
+            pencegahan = "• Pastikan foto yang diunggah jelas, fokus, dan menunjukan daun secara utuh \n • Coba ulangi dengan sudut pengambilan gambar yang berbeda \n • Pastikan gambar berasal dari tanaman anggur"
         )
         else -> null
     }
