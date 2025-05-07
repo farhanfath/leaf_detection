@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
+import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,12 +33,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
-import pi.project.grapify.presentation.components.ChooseImageSection
 import pi.project.grapify.presentation.components.EmptySection
-import pi.project.grapify.presentation.screens.example.EnhancedResultCard
-import pi.project.grapify.presentation.screens.example.InfoDialog
-import pi.project.grapify.presentation.screens.example.LoadingIndicator
-import pi.project.grapify.presentation.screens.example.PreviewCard
+import pi.project.grapify.presentation.components.ErrorMessage
+import pi.project.grapify.presentation.components.LoadingIndicator
+import pi.project.grapify.presentation.components.dialog.ImageSourceBottomSheet
+import pi.project.grapify.presentation.components.dialog.InfoDialog
+import pi.project.grapify.presentation.components.imagehandler.CameraView
+import pi.project.grapify.presentation.components.imagehandler.PreviewCard
+import pi.project.grapify.presentation.components.result.ResultCard
+import pi.project.grapify.presentation.state.ImageSource
 import pi.project.grapify.presentation.state.UiState
 import pi.project.grapify.presentation.viewmodel.GrapeLeafDiseaseViewModel
 
@@ -56,6 +60,7 @@ fun DetectionScreen(
 
     // dialog handler
     var showMoreInfo by remember { mutableStateOf(false) }
+    var showImageSourceBottomSheet by remember { mutableStateOf(false) }
 
     val uiState by viewModel.uiState.collectAsState()
     val showRawOutput by viewModel.showRawOutput.collectAsState()
@@ -65,21 +70,22 @@ fun DetectionScreen(
         Manifest.permission.CAMERA
     )
 
-    // Launcher untuk memilih gambar dari galeri
+    // gallery launcher
     val galleryLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
         selectedImageUri = uri
         uri?.let {
             try {
-                val source = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    ImageDecoder.createSource(context.contentResolver, it)
+                bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    val source = ImageDecoder.createSource(context.contentResolver, it)
+                    ImageDecoder.decodeBitmap(source) { decoder, _, _ ->
+                        decoder.allocator = ImageDecoder.ALLOCATOR_SOFTWARE
+                        decoder.isMutableRequired = true
+                    }
                 } else {
-                    TODO("VERSION.SDK_INT < P")
-                }
-                bitmap = ImageDecoder.decodeBitmap(source) { decoder, _, _ ->
-                    decoder.allocator = ImageDecoder.ALLOCATOR_SOFTWARE
-                    decoder.isMutableRequired = true
+                    @Suppress("DEPRECATION")
+                    MediaStore.Images.Media.getBitmap(context.contentResolver, it)
                 }
                 imageSource = ImageSource.Gallery
             } catch (e: Exception) {
@@ -115,19 +121,6 @@ fun DetectionScreen(
                         .padding(bottom = 24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Upload Section dengan animasi
-                    ChooseImageSection(
-                        onGalleryClick = {
-                            galleryLauncher.launch("image/*")
-                        },
-                        onCameraClick = {
-                            if (cameraPermissionState.status.isGranted) {
-                                showCamera = true
-                            } else {
-                                cameraPermissionState.launchPermissionRequest()
-                            }
-                        }
-                    )
                     // Menampilkan gambar preview dalam bentuk card
                     bitmap?.let { bm ->
                         AnimatedVisibility(
@@ -144,16 +137,19 @@ fun DetectionScreen(
                     // Menampilkan state UI
                     when (val state = uiState) {
                         is UiState.Idle -> {
-                            // Tampilan awal, tidak ada yang perlu ditampilkan
                             if (bitmap == null) {
-                                EmptySection()
+                                EmptySection(
+                                    onSelectImageClick = {
+                                        showImageSourceBottomSheet = true
+                                    }
+                                )
                             }
                         }
                         is UiState.Loading -> {
                             LoadingIndicator()
                         }
                         is UiState.Error -> {
-                            pi.project.grapify.presentation.screens.example.ErrorMessage(message = state.message)
+                            ErrorMessage(message = state.message)
                         }
                         is UiState.Success -> {
                             bitmap?.let { bm ->
@@ -161,7 +157,7 @@ fun DetectionScreen(
                                     visible = true,
                                     enter = expandVertically() + fadeIn()
                                 ) {
-                                    EnhancedResultCard(
+                                    ResultCard(
                                         bitmap = bm,
                                         prediction = state.prediction,
                                         confidenceScores = state.confidenceScores,
@@ -179,6 +175,27 @@ fun DetectionScreen(
             // Info Dialog
             if (showMoreInfo) {
                 InfoDialog(onDismiss = { showMoreInfo = false })
+            }
+
+            // choose image source dialog
+            if (showImageSourceBottomSheet) {
+                ImageSourceBottomSheet(
+                    onDismissRequest = {
+                        showImageSourceBottomSheet = false
+                    },
+                    onGalleryClick = {
+                        galleryLauncher.launch("image/*")
+                        showImageSourceBottomSheet = false
+                    },
+                    onCameraClick = {
+                        if (cameraPermissionState.status.isGranted) {
+                            showCamera = true
+                            showImageSourceBottomSheet = false
+                        } else {
+                            cameraPermissionState.launchPermissionRequest()
+                        }
+                    }
+                )
             }
         }
     }
