@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Restore
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -29,12 +30,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import pi.project.grapify.presentation.state.UiState
 
+@Preview
 @Composable
 fun PreviewCard(
-  bitmap: Bitmap,
-  onAnalyzeClick: () -> Unit
+  bitmap: Bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888),
+  onAnalyzeClick: () -> Unit = {},
+  onRetryClick: () -> Unit = {},
+  uiState: UiState = UiState.Idle
 ) {
   Card(
     modifier = Modifier
@@ -93,6 +99,36 @@ fun PreviewCard(
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold
           )
+        }
+      }
+
+      if (uiState is UiState.Success) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+          onClick = onRetryClick,
+          modifier = Modifier
+            .fillMaxWidth(0.8f)
+            .height(50.dp),
+          shape = RoundedCornerShape(25.dp),
+          colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary
+          )
+        ) {
+          Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+          ) {
+            Icon(
+              imageVector = Icons.Default.Restore,
+              contentDescription = "retry"
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+              text = "Pilih Gambar Lainnya",
+              style = MaterialTheme.typography.bodyLarge,
+              fontWeight = FontWeight.Bold
+            )
+          }
         }
       }
     }

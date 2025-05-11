@@ -16,16 +16,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,7 +52,8 @@ fun ResultCard(
   confidenceScores: List<ClassPrediction>,
   rawOutput: String,
   showRawOutput: Boolean,
-  onToggleRawOutput: () -> Unit
+  onToggleRawOutput: () -> Unit,
+  onShowInfoClick: (String) -> Unit = {}
 ) {
   var expandedDisease by remember { mutableStateOf(false) }
   val diseaseInfo = getDiseaseInfo(prediction)
@@ -73,7 +79,10 @@ fun ResultCard(
           )
           .padding(16.dp)
       ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalAlignment = Alignment.CenterHorizontally
+        ) {
           Text(
             text = "Hasil Deteksi",
             style = MaterialTheme.typography.titleLarge,
@@ -81,14 +90,38 @@ fun ResultCard(
             color = Color.White
           )
 
-          Spacer(modifier = Modifier.height(8.dp))
-
-          Text(
-            text = prediction,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.SemiBold,
-            color = Color.White
+          HorizontalDivider(
+            modifier = Modifier.padding(vertical = 16.dp),
+            color = MaterialTheme.colorScheme.onBackground
           )
+
+          Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+          ) {
+            Text(
+              text = prediction,
+              style = MaterialTheme.typography.titleMedium,
+              fontWeight = FontWeight.SemiBold,
+              color = Color.White
+            )
+
+            // Info Button
+            if (prediction != "Not Anggur") {
+              IconButton(
+                onClick = {
+                  onShowInfoClick(prediction)
+                }
+              ) {
+                Icon(
+                  imageVector = Icons.Default.Info,
+                  contentDescription = "Info penyakit",
+                  tint = MaterialTheme.colorScheme.primary
+                )
+              }
+            }
+          }
         }
       }
 
@@ -171,42 +204,6 @@ fun ResultCard(
               )
               .padding(12.dp)
           )
-        }
-      }
-
-      // Action buttons
-      Spacer(modifier = Modifier.height(24.dp))
-
-      Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-      ) {
-        OutlinedButton(
-          onClick = { /* Share result logic */ },
-          modifier = Modifier.weight(1f),
-          shape = RoundedCornerShape(8.dp)
-        ) {
-          Icon(
-            imageVector = Icons.Default.Share,
-            contentDescription = "Share"
-          )
-          Spacer(modifier = Modifier.width(8.dp))
-          Text("Bagikan")
-        }
-
-        Spacer(modifier = Modifier.width(16.dp))
-
-        Button(
-          onClick = { /* Save result logic */ },
-          modifier = Modifier.weight(1f),
-          shape = RoundedCornerShape(8.dp)
-        ) {
-          Icon(
-            imageVector = Icons.Default.Save,
-            contentDescription = "Save"
-          )
-          Spacer(modifier = Modifier.width(8.dp))
-          Text("Simpan")
         }
       }
     }

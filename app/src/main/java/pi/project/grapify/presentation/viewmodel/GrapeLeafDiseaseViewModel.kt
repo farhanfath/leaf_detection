@@ -53,6 +53,10 @@ class GrapeLeafDiseaseViewModel @Inject constructor(
         _showRawOutput.value = !_showRawOutput.value
     }
 
+    fun resetState() {
+        _uiState.value = UiState.Idle
+    }
+
     private fun formatRawOutput(rawOutput: FloatArray): String {
         return buildString {
             append("Output Mentah Model:\n")
