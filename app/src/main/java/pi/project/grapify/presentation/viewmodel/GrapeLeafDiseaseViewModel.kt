@@ -22,9 +22,6 @@ class GrapeLeafDiseaseViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
     val uiState= _uiState.asStateFlow()
 
-    private val _showRawOutput = MutableStateFlow(false)
-    val showRawOutput: StateFlow<Boolean> = _showRawOutput
-
     init {
         // Inspect model on initialization
         repository.inspectModel()
@@ -47,10 +44,6 @@ class GrapeLeafDiseaseViewModel @Inject constructor(
                 }
             )
         }
-    }
-
-    fun toggleRawOutput() {
-        _showRawOutput.value = !_showRawOutput.value
     }
 
     fun resetState() {

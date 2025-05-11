@@ -4,5 +4,6 @@ data class DiseaseInfo(
     val nama: String,
     val penyebab: String,
     val gejala: String,
-    val pencegahan: String
+    val pencegahan: String,
+    val imageSample: Int
 )

@@ -15,6 +15,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GrapifyTheme(
+                dynamicColor = false,
+                darkTheme = false
             ) {
                 DetectionScreen()
             }

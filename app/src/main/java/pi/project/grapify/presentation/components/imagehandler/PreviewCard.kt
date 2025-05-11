@@ -2,11 +2,15 @@ package pi.project.grapify.presentation.components.imagehandler
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.Restore
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -27,7 +32,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,11 +63,20 @@ fun PreviewCard(
         .padding(16.dp),
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      Text(
-        text = "Preview Gambar",
-        style = MaterialTheme.typography.titleMedium,
-        fontWeight = FontWeight.Medium
-      )
+      // Title with icon
+      Row(verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+          imageVector = Icons.Default.Image,
+          contentDescription = null,
+          tint = MaterialTheme.colorScheme.primary
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+          text = "Preview Gambar",
+          style = MaterialTheme.typography.titleMedium,
+          fontWeight = FontWeight.Bold
+        )
+      }
 
       Spacer(modifier = Modifier.height(16.dp))
 
@@ -75,61 +92,84 @@ fun PreviewCard(
 
       Spacer(modifier = Modifier.height(16.dp))
 
-      Button(
-        onClick = onAnalyzeClick,
-        modifier = Modifier
-          .fillMaxWidth(0.8f)
-          .height(50.dp),
-        shape = RoundedCornerShape(25.dp),
-        colors = ButtonDefaults.buttonColors(
-          containerColor = MaterialTheme.colorScheme.primary
-        )
-      ) {
-        Row(
-          verticalAlignment = Alignment.CenterVertically,
-          horizontalArrangement = Arrangement.Center
-        ) {
-          Icon(
-            imageVector = Icons.Default.Search,
-            contentDescription = "Analyze"
-          )
-          Spacer(modifier = Modifier.width(8.dp))
-          Text(
+      when(uiState) {
+        is UiState.Idle -> {
+          GradientButton(
+            onClick = onAnalyzeClick,
             text = "Analisis Gambar",
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold
+            icon = Icons.Default.Search
           )
-        }
-      }
 
-      if (uiState is UiState.Success) {
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(
-          onClick = onRetryClick,
-          modifier = Modifier
-            .fillMaxWidth(0.8f)
-            .height(50.dp),
-          shape = RoundedCornerShape(25.dp),
-          colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary
+          Spacer(modifier = Modifier.height(4.dp))
+
+          Text(
+            text = "Ketuk untuk menganalisis gambar",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(4.dp)
           )
-        ) {
-          Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-          ) {
-            Icon(
-              imageVector = Icons.Default.Restore,
-              contentDescription = "retry"
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-              text = "Pilih Gambar Lainnya",
-              style = MaterialTheme.typography.bodyLarge,
-              fontWeight = FontWeight.Bold
-            )
-          }
         }
+        is UiState.Success -> {
+          GradientButton(
+            onClick = onRetryClick,
+            text = "Pilih Gambar Lainnya",
+            icon = Icons.Default.Restore,
+            gradientColors = listOf(
+              MaterialTheme.colorScheme.tertiary,
+              MaterialTheme.colorScheme.secondary
+            )
+          )
+        }
+        is UiState.Loading -> {}
+        is UiState.Error -> {}
+      }
+    }
+  }
+}
+
+@Composable
+fun GradientButton(
+  onClick: () -> Unit,
+  text: String,
+  icon: ImageVector,
+  gradientColors: List<Color> = listOf(
+    MaterialTheme.colorScheme.primary,
+    MaterialTheme.colorScheme.secondary
+  )
+) {
+  Button(
+    onClick = onClick,
+    modifier = Modifier
+      .fillMaxWidth(0.9f)
+      .height(56.dp),
+    shape = RoundedCornerShape(28.dp),
+    contentPadding = PaddingValues(0.dp),
+    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+  ) {
+    Box(
+      modifier = Modifier
+        .fillMaxSize()
+        .background(
+          brush = Brush.horizontalGradient(colors = gradientColors)
+        ),
+      contentAlignment = Alignment.Center
+    ) {
+      Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+      ) {
+        Icon(
+          imageVector = icon,
+          contentDescription = null,
+          tint = Color.White
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        Text(
+          text = text,
+          style = MaterialTheme.typography.bodyLarge,
+          fontWeight = FontWeight.Bold,
+          color = Color.White
+        )
       }
     }
   }

@@ -21,11 +21,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideGrapeLeafDiseaseRepository(
-        @ApplicationContext context: Context,
         imageProcessor: ImageProcessor,
         modelAnalyzer: ModelAnalyzer
     ) : GrapeLeafDiseaseRepository {
-        return GrapeLeafDiseaseRepositoryImpl(context, imageProcessor, modelAnalyzer)
+        return GrapeLeafDiseaseRepositoryImpl(imageProcessor, modelAnalyzer)
     }
 
     @Provides
