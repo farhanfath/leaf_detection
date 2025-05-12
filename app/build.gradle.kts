@@ -79,21 +79,21 @@ dependencies {
     implementation(libs.coil3.coil.compose)
     implementation(libs.coil.network.okhttp)
 
-    // koin
+    // hilt
     implementation(libs.hilt.android)
     implementation (libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
     kapt(libs.hilt.android.compiler)
 
     // CameraX
-    implementation("androidx.camera:camera-core:1.4.2")
-    implementation("androidx.camera:camera-camera2:1.4.2")
-    implementation("androidx.camera:camera-lifecycle:1.4.2")
-    implementation("androidx.camera:camera-view:1.4.2")
-    implementation("androidx.camera:camera-extensions:1.4.2")
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.extensions)
 
     // Permissions
-    implementation ("com.google.accompanist:accompanist-permissions:0.30.1")
+    implementation (libs.accompanist.permissions)
 
     // icons
     implementation(libs.androidx.material.icons.extended)
