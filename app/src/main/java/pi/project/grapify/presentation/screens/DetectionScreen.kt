@@ -56,7 +56,7 @@ import pi.project.grapify.presentation.components.LoadingIndicator
 import pi.project.grapify.presentation.components.dialog.ImageSourceBottomSheet
 import pi.project.grapify.presentation.components.dialog.InfoDialog
 import pi.project.grapify.presentation.components.glossary.GrapeDiseasesGlossaryDrawer
-import pi.project.grapify.presentation.components.imagehandler.PreviewCard
+import pi.project.grapify.presentation.components.PreviewCard
 import pi.project.grapify.presentation.components.result.ResultCard
 import pi.project.grapify.presentation.state.UiState
 import pi.project.grapify.presentation.utils.rememberMediaHelper

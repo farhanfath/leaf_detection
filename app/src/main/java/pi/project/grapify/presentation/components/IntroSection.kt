@@ -75,7 +75,7 @@ fun IntroSection(
                     .padding(24.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    painter = painterResource(id = R.drawable.logo_grapify),
                     contentDescription = "Daun Anggur",
                     modifier = Modifier
                         .padding(16.dp)

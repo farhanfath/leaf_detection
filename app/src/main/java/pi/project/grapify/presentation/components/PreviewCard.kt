@@ -1,4 +1,4 @@
-package pi.project.grapify.presentation.components.imagehandler
+package pi.project.grapify.presentation.components
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image

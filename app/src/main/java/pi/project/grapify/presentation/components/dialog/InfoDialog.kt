@@ -47,7 +47,7 @@ fun InfoDialog(onDismiss: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-          text = "Aplikasi ini menggunakan model machine learning untuk mendeteksi berbagai kondisi pada daun anggur, termasuk penyakit, daun sehat, maupun gambar yang tidak relevan. Cukup unggah atau ambil foto daun anggur, dan sistem akan menganalisisnya secara otomatis.",
+          text = "Aplikasi ini menggunakan model deep learning untuk mendeteksi berbagai kondisi pada daun anggur, termasuk penyakit, daun sehat, maupun gambar yang tidak relevan. Cukup unggah atau ambil foto daun anggur, dan sistem akan menganalisisnya secara otomatis.",
           style = MaterialTheme.typography.bodyMedium,
           textAlign = TextAlign.Center
         )

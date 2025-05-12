@@ -1,6 +1,5 @@
 package pi.project.grapify.data.repository
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
 import pi.project.grapify.data.model.ClassPrediction
