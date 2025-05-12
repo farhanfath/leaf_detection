@@ -3,7 +3,6 @@ package pi.project.grapify.presentation.components.glossary
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -41,7 +40,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -170,8 +168,7 @@ fun DiseaseCard(disease: DiseaseInfo) {
             // Dropdown arrow icon
             Icon(
                 imageVector = if (expanded) Icons.Default.ArrowDropUp else Icons.Default.ArrowDropDown,
-                contentDescription = if (expanded) "Collapse" else "Expand",
-//                modifier = Modifier.rotate(rotationState)
+                contentDescription = if (expanded) "Collapse" else "Expand"
             )
         }
 
@@ -187,14 +184,6 @@ fun DiseaseCard(disease: DiseaseInfo) {
                     .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
             ) {
                 HorizontalDivider()
-                Spacer(modifier = Modifier.height(12.dp))
-                Image(
-                    painter = painterResource(disease.imageSample),
-                    modifier = Modifier
-                        .width(220.dp)
-                        .height(140.dp),
-                    contentDescription = "grape leaf sample"
-                )
                 Spacer(modifier = Modifier.height(12.dp))
 
                 // Penyebab section
