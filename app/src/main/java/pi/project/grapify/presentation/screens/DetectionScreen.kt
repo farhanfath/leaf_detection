@@ -1,7 +1,9 @@
 package pi.project.grapify.presentation.screens
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.net.Uri
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -9,29 +11,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -43,9 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 import pi.project.grapify.data.model.DiseaseInfo
@@ -53,10 +42,11 @@ import pi.project.grapify.domain.util.getDiseaseInfo
 import pi.project.grapify.presentation.components.ErrorMessage
 import pi.project.grapify.presentation.components.IntroSection
 import pi.project.grapify.presentation.components.LoadingIndicator
+import pi.project.grapify.presentation.components.PreviewCard
+import pi.project.grapify.presentation.components.dialog.DiseaseDetailDialog
 import pi.project.grapify.presentation.components.dialog.ImageSourceBottomSheet
 import pi.project.grapify.presentation.components.dialog.InfoDialog
 import pi.project.grapify.presentation.components.glossary.GrapeDiseasesGlossaryDrawer
-import pi.project.grapify.presentation.components.PreviewCard
 import pi.project.grapify.presentation.components.result.ResultCard
 import pi.project.grapify.presentation.state.UiState
 import pi.project.grapify.presentation.utils.rememberMediaHelper
@@ -103,6 +93,27 @@ fun DetectionScreen(
         initialValue = DrawerValue.Closed
     )
     var selectedDisease by remember { mutableStateOf<DiseaseInfo?>(null) }
+
+    /**
+     * untuk handle tombol back di screen berdasarkan kondisi
+     */
+    BackHandler {
+        when {
+            showDiseaseDetailDialog -> {
+                showDiseaseDetailDialog = false
+                selectedDisease = null
+            }
+            showMoreInfo -> showMoreInfo = false
+            showImageSourceBottomSheet -> showImageSourceBottomSheet = false
+            drawerState.isOpen -> scope.launch { drawerState.close() }
+            bitmap != null || uiState !is UiState.Idle -> {
+                bitmap = null
+                selectedImageUri = null
+                viewModel.resetState()
+            }
+            else -> (context as? Activity)?.finish()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -258,95 +269,4 @@ fun DetectionScreen(
             }
         }
     }
-}
-
-@Composable
-fun DiseaseDetailDialog(
-    diseaseInfo: DiseaseInfo,
-    onDismiss: () -> Unit
-) {
-    Dialog(onDismissRequest = onDismiss) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(max = 500.dp),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 8.dp
-            ),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .verticalScroll(rememberScrollState())
-                    .padding(20.dp)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = diseaseInfo.nama,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    IconButton(onClick = onDismiss) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = "Tutup"
-                        )
-                    }
-                }
-
-                HorizontalDivider(modifier = Modifier.padding(bottom = 16.dp))
-
-                SectionTitle(title = "Penyebab")
-                Text(
-                    text = diseaseInfo.penyebab,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-
-                SectionTitle(title = "Gejala")
-                Text(
-                    text = diseaseInfo.gejala,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-
-                SectionTitle(title = "Pencegahan")
-                Text(
-                    text = diseaseInfo.pencegahan,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-
-                Button(
-                    onClick = onDismiss,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp)
-                ) {
-                    Text("Tutup")
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun SectionTitle(title: String) {
-    Text(
-        text = title,
-        style = MaterialTheme.typography.titleMedium,
-        fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.primary,
-        modifier = Modifier.padding(bottom = 4.dp)
-    )
 }

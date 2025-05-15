@@ -178,6 +178,8 @@ fun DiseaseCard(disease: DiseaseInfo) {
             enter = expandVertically(),
             exit = shrinkVertically()
         ) {
+            val isSpecialCase = disease.nama == "Grape Healthy" || disease.nama == "Not Anggur"
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -186,18 +188,25 @@ fun DiseaseCard(disease: DiseaseInfo) {
                 HorizontalDivider()
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Penyebab section
-                DiseaseInfoSection(title = "Penyebab", content = disease.penyebab)
+                // Section 1: Penyebab + Gejala -> Keadaan jika Grape Healthy
+                DiseaseInfoSection(
+                    title = if (isSpecialCase) "Keadaan" else "Penyebab",
+                    content = if (isSpecialCase) "${disease.penyebab}\n\n${disease.gejala}" else disease.penyebab
+                )
+
+                // Tampilkan Gejala hanya jika bukan Grape Healthy
+                if (!isSpecialCase) {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    DiseaseInfoSection(title = "Gejala", content = disease.gejala)
+                }
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Gejala section
-                DiseaseInfoSection(title = "Gejala", content = disease.gejala)
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                // Pencegahan section
-                DiseaseInfoSection(title = "Pencegahan", content = disease.pencegahan)
+                // Pencegahan -> Tips jika Grape Healthy
+                DiseaseInfoSection(
+                    title = if (isSpecialCase) "Tips" else "Pencegahan",
+                    content = disease.pencegahan
+                )
             }
         }
     }
