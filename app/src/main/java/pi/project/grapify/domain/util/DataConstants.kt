@@ -3,6 +3,7 @@ package pi.project.grapify.domain.util
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import pi.project.grapify.R
 import pi.project.grapify.data.model.DiseaseInfo
 
 // untuk filtering result data
@@ -19,7 +20,8 @@ fun getDiseaseInfo(diseaseName: String): DiseaseInfo? {
             • Pada akhir musim panas, potong bagian tanaman anggur yang membusuk.
             • Singkirkan sisa-sisa tanaman anggur yang terserang penyakit dan musnahkan.
             • Tunda pembuahan selama beberapa tahun hingga tanaman merambat memiliki pertumbuhan akar dan tunas yang seimbang.
-        """.trimIndent()
+        """.trimIndent(),
+            imageSample = R.drawable.img_black_rot
         )
 
         "Grape Esca (Black Measles)" -> DiseaseInfo(
@@ -34,7 +36,8 @@ fun getDiseaseInfo(diseaseName: String): DiseaseInfo? {
             • Jaga kebersihan kebun anggur dengan membersihkan gulma.
             • Pastikan sirkulasi udara dan pencahayaan di kebun cukup.
             • Lakukan pemangkasan tanaman anggur setiap tahun sebelum fase vegetatif dimulai.
-        """.trimIndent()
+        """.trimIndent(),
+            imageSample = R.drawable.img_esca
         )
 
         "Grape Leaf Blight (Isariopsis Leaf Spot)" -> DiseaseInfo(
@@ -50,7 +53,8 @@ fun getDiseaseInfo(diseaseName: String): DiseaseInfo? {
             • Membersihkan alat pertanian dan tempat penyimpanan secara berkala.
             • Menggunakan fungisida sesuai kebutuhan dan anjuran.
             • Memantau tanaman secara berkala untuk deteksi dini infeksi.
-        """.trimIndent()
+        """.trimIndent(),
+            imageSample = R.drawable.img_leaf_blight
         )
 
         "Grape Healthy" -> DiseaseInfo(
@@ -66,7 +70,8 @@ fun getDiseaseInfo(diseaseName: String): DiseaseInfo? {
             • Melakukan rotasi tanaman dan sanitasi kebun yang baik.
             • Pemantauan hama dan penyakit secara berkala.
             • Menggunakan varietas anggur yang tahan terhadap penyakit umum di daerah tersebut.
-        """.trimIndent()
+        """.trimIndent(),
+            imageSample = R.drawable.img_grape_healthy
         )
         "Not Anggur" -> DiseaseInfo(
             nama = "Not Anggur",
@@ -76,7 +81,8 @@ fun getDiseaseInfo(diseaseName: String): DiseaseInfo? {
             • Pastikan foto yang diunggah jelas, fokus, dan menunjukan daun secara utuh 
             • Coba ulangi dengan sudut pengambilan gambar yang berbeda 
             • Pastikan gambar berasal dari tanaman anggur
-            """.trimIndent()
+            """.trimIndent(),
+            imageSample = R.drawable.img_not_anggur
         )
         else -> null
     }

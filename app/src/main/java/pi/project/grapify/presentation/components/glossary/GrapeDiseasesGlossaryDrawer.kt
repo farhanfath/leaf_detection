@@ -3,6 +3,7 @@ package pi.project.grapify.presentation.components.glossary
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -40,6 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -186,15 +188,29 @@ fun DiseaseCard(disease: DiseaseInfo) {
                     .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
             ) {
                 HorizontalDivider()
+
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Section 1: Penyebab + Gejala -> Keadaan jika Grape Healthy
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(disease.imageSample),
+                        modifier = Modifier.size(180.dp),
+                        contentDescription = "grape leaf sample"
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                // Section 1: Penyebab + Gejala -> Keadaan jika Grape Healthy || Not Anggur
                 DiseaseInfoSection(
                     title = if (isSpecialCase) "Keadaan" else "Penyebab",
                     content = if (isSpecialCase) "${disease.penyebab}\n\n${disease.gejala}" else disease.penyebab
                 )
 
-                // Tampilkan Gejala hanya jika bukan Grape Healthy
+                // Tampilkan Gejala hanya jika bukan Grape Healthy || Not Anggur
                 if (!isSpecialCase) {
                     Spacer(modifier = Modifier.height(12.dp))
                     DiseaseInfoSection(title = "Gejala", content = disease.gejala)
@@ -202,7 +218,7 @@ fun DiseaseCard(disease: DiseaseInfo) {
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Pencegahan -> Tips jika Grape Healthy
+                // Pencegahan -> Tips jika Grape Healthy || Not Anggur
                 DiseaseInfoSection(
                     title = if (isSpecialCase) "Tips" else "Pencegahan",
                     content = disease.pencegahan
