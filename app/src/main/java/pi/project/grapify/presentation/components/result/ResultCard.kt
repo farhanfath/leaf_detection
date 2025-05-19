@@ -28,6 +28,9 @@ import androidx.compose.ui.unit.dp
 import pi.project.grapify.data.model.ClassPrediction
 import pi.project.grapify.domain.util.getColorForDisease
 
+/**
+ * TODO: komponen yang menampilkan hasil prediksi dari model setelah dilakukan deteksi
+ */
 @Composable
 fun ResultCard(
   prediction: String,

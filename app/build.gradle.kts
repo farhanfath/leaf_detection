@@ -61,12 +61,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // tf lite
-//    implementation(libs.tensorflow.lite.task.vision)
-//    implementation(libs.tensorflow.lite)
-//    implementation(libs.tensorflow.lite.support)
-//    implementation(libs.tensorflow.lite.metadata)
-
+    /**
+     * TODO: disini untuk mengimplementasikan semua dependency yang diperlukan untuk aplikasi yang sudah ditambahkan sebelumnya di version.toml
+     */
     // viewmodel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 

@@ -1,5 +1,8 @@
 package pi.project.grapify.data.model
 
+/**
+ * TODO: class untuk handling semua hasil yang didapatkan dari model contoh (black rot, list(not anggur 10%, black rot 90%,...), log dalam float array)
+ */
 data class PredictionResult(
     val predictedClass: String,
     val allPredictions: List<ClassPrediction>,

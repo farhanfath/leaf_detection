@@ -60,6 +60,9 @@ fun getDiseaseIconAndColor(diseaseName: String): Pair<ImageVector, Color> {
     }
 }
 
+/**
+ * TODO: komponen yang menampilkan glossarium
+ */
 @Composable
 fun GrapeDiseasesGlossaryDrawer() {
     val diseases = getDiseaseGlossary()

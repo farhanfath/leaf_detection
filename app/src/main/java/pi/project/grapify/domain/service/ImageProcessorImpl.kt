@@ -8,6 +8,9 @@ import java.nio.ByteOrder
 import javax.inject.Inject
 
 class ImageProcessorImpl @Inject constructor(): ImageProcessor {
+    /**
+     * TODO: disini untuk preprocessing gambar yang akan diproses ke model yang mana menyesuaikan kebutuhan bitmap nya yaitu 224
+     */
     override fun preProcessImage(bitmap: Bitmap): ByteBuffer {
         val inputSize = Constants.INPUT_SIZE
         val byteBuffer = ByteBuffer.allocateDirect(4 * inputSize * inputSize * 3)

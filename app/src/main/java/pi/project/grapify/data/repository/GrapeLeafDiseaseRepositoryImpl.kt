@@ -13,6 +13,9 @@ class GrapeLeafDiseaseRepositoryImpl @Inject constructor(
     private val imageProcessor: ImageProcessor,
     private val modelAnalyzer: ModelAnalyzer
 ) : GrapeLeafDiseaseRepository {
+    /**
+     * TODO: disini untuk transaksi utama dari penggunaan model yang mana mengirimkan gambar dalam bitmap dan mendapatkan hasil dalam bentuk PredictionResult
+     */
     override suspend fun predictDisease(bitmap: Bitmap): Result<PredictionResult> {
         return try {
             // Resize gambar ke ukuran input model
@@ -43,6 +46,10 @@ class GrapeLeafDiseaseRepositoryImpl @Inject constructor(
             val maxPrediction = predictions.maxByOrNull { it.confidence }
                 ?: ClassPrediction("Unknown", 0f)
 
+            /**
+             * TODO: important
+             *
+             */
             Result.success(
                 PredictionResult(
                     predictedClass = maxPrediction.className,
@@ -56,6 +63,9 @@ class GrapeLeafDiseaseRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * TODO: disini untuk mengenalkan model kepada pusat dari transaksi ini yaitu repository
+     */
     override fun inspectModel() {
         modelAnalyzer.inspectModel()
     }

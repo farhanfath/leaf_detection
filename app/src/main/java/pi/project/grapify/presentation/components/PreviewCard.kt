@@ -42,6 +42,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pi.project.grapify.presentation.state.UiState
 
+/**
+ * TODO: komponen untuk menampilkan preview gambar yang dipilh
+ */
 @Preview
 @Composable
 fun PreviewCard(

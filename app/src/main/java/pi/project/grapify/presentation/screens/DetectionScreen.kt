@@ -52,6 +52,9 @@ import pi.project.grapify.presentation.state.UiState
 import pi.project.grapify.presentation.utils.rememberMediaHelper
 import pi.project.grapify.presentation.viewmodel.GrapeLeafDiseaseViewModel
 
+/**
+ * TODO: halaman tampilan utama semua dihandle disini yang dipecah per komponen2
+ */
 @Composable
 fun DetectionScreen(
     viewModel: GrapeLeafDiseaseViewModel = hiltViewModel<GrapeLeafDiseaseViewModel>()
@@ -129,6 +132,9 @@ fun DetectionScreen(
             modifier = Modifier.padding(innerPadding),
             drawerState = drawerState,
             drawerContent = {
+                /**
+                 * TODO: sidebar untuk menampilkan glosarium
+                 */
                 ModalDrawerSheet(
                     modifier = Modifier.width(280.dp)
                 ) {
@@ -156,6 +162,9 @@ fun DetectionScreen(
                         /**
                          * tampilan utama aplikasi
                          */
+                        /**
+                         * TODO: ini berisi halaman utama yaitu seperti tombol mulai deteksi dan tombol glossary
+                         */
                         IntroSection(
                             onSelectImageClick = {
                                 showImageSourceBottomSheet = true
@@ -181,6 +190,9 @@ fun DetectionScreen(
 
                         /**
                          * untuk menampilkan gambar yang sudah terpilih atau diambil dari kamera
+                         */
+                        /**
+                         * TODO: kalau gambar nya tidak kosong akan menampilkan preview gambar nya melalui komponen ini
                          */
                         bitmap?.let { bm ->
                             AnimatedVisibility(
@@ -217,6 +229,9 @@ fun DetectionScreen(
                                     visible = true,
                                     enter = expandVertically() + fadeIn()
                                 ) {
+                                    /**
+                                     * TODO: ini adalah saat deteksi berhasil dilakukan maka akan ditampilkan di komponen ini
+                                     */
                                     ResultCard(
                                         prediction = state.prediction,
                                         confidenceScores = state.confidenceScores,
@@ -241,6 +256,9 @@ fun DetectionScreen(
 
                 // Disease Detail Dialog
                 if (showDiseaseDetailDialog && selectedDisease != null) {
+                    /**
+                     * TODO: ini dialog untuk menampilkan informasi lanjutan terkait penyakit yang didapatkan setelah melakukan deteksi
+                     */
                     DiseaseDetailDialog(
                         diseaseInfo = selectedDisease!!,
                         onDismiss = {
@@ -252,6 +270,9 @@ fun DetectionScreen(
 
                 // choose image source dialog
                 if (showImageSourceBottomSheet) {
+                    /**
+                     * TODO: ini adalah tampilan bottomsheet yang menampilkan tombol kamera dan gallery
+                     */
                     ImageSourceBottomSheet(
                         onDismissRequest = {
                             showImageSourceBottomSheet = false

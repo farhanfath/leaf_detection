@@ -29,6 +29,9 @@ class MediaHelper(
     val openCamera: () -> Unit
 )
 
+/**
+ * TODO: sebuah helper unuk menghandle izin kamera dan juga gallery
+ */
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun rememberMediaHelper(

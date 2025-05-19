@@ -15,6 +15,10 @@ import javax.inject.Inject
 class TFLiteModelAnalyzer @Inject constructor(
     private val context: Context
 ) : ModelAnalyzer {
+    /**
+     * TODO: disini menggunakan code yang sudah tersedia dari model yang sudah dimasukkan ke aplikasi
+     * yang mana disini untuk membuat semacam gerbang untuk mengakses atau menggunakan model tersebut
+     */
     override fun runInference(inputBuffer: ByteBuffer): FloatArray {
         try {
             // Menggunakan TensorFlow Lite model binding
@@ -46,6 +50,9 @@ class TFLiteModelAnalyzer @Inject constructor(
 
     override fun inspectModel() {
         try {
+            /**
+             * TODO: disini untuk mengenalkan model yang nantinya akan digunakan dengan memanggil nama model contoh : Constants.MODEL_FILENAME
+             */
             val modelFile = context.assets.openFd(Constants.MODEL_FILENAME)
             val fileDescriptor = modelFile.fileDescriptor
             val interpreter = Interpreter(

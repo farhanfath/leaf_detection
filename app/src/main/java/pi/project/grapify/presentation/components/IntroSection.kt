@@ -49,7 +49,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pi.project.grapify.R
 
-
+/**
+ * TODO: halaman pembuka yang berisi grapify, tombol mulai deteksi, dan tombol glosarium
+ */
 @Composable
 fun IntroSection(
     onSelectImageClick: () -> Unit,

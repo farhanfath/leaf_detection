@@ -7,6 +7,9 @@ import pi.project.grapify.R
 import pi.project.grapify.data.model.DiseaseInfo
 
 // untuk filtering result data
+/**
+ * TODO: disini untuk berisi data2 terkait hasil disesase dari model seperti penyebab, gejala, pencegahan, dsb
+ */
 fun getDiseaseInfo(diseaseName: String): DiseaseInfo? {
     return when (diseaseName) {
         "Grape Black Rot" -> DiseaseInfo(
@@ -88,6 +91,9 @@ fun getDiseaseInfo(diseaseName: String): DiseaseInfo? {
     }
 }
 
+/**
+ * TODO: disini untuk handling perihal warna yang akan ditampilkan berdasarkan output nama yang didapatkan
+ */
 @Composable
 fun getColorForDisease(diseaseName: String): Color {
     return when (diseaseName) {
@@ -100,6 +106,9 @@ fun getColorForDisease(diseaseName: String): Color {
     }
 }
 
+/**
+ * TODO: disini untuk handling tentang presentase yang didapatkan oleh hasil dari model
+ */
 fun getConfidenceColor(confidence: Float): Color {
     return when {
         confidence >= 0.8f -> Color(0xFF4CAF50) // Hijau

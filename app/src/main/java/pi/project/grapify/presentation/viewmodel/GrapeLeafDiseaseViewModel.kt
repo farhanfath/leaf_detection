@@ -26,6 +26,9 @@ class GrapeLeafDiseaseViewModel @Inject constructor(
         repository.inspectModel()
     }
 
+    /**
+     * TODO: function utama untuk melakukan pendeteksian pada sebuah gambar yang sudah dipilih
+     */
     fun detectDisease(bitmap: Bitmap) {
         viewModelScope.launch {
             _uiState.value = UiState.Loading

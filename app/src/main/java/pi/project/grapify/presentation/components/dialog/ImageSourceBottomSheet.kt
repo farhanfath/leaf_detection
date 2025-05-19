@@ -31,6 +31,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
+/**
+ * TODO: komponen yang menampilkan 2 tombol kamera dan gallery
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImageSourceBottomSheet(

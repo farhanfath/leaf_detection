@@ -22,12 +22,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pi.project.grapify.domain.util.getConfidenceColor
 import java.util.Locale
 
+/**
+ * TODO: komponen yang menampilkan indicator dari hasil confidence skor dalam bentur garis
+ */
+@Preview(showBackground = true)
 @Composable
-fun ConfidenceScoreItem(label: String, score: Float) {
+fun ConfidenceScoreItem(
+  label: String = "",
+  score: Float = 1f
+) {
   val animatedProgress = remember { Animatable(initialValue = 0f) }
 
   LaunchedEffect(key1 = score) {
