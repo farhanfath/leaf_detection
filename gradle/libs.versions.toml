@@ -28,9 +28,6 @@ materialIconsExtended = "1.7.8"
 # coroutine
 kotlinxCoroutinesCore = "1.10.1"
 
-# camera x
-cameraX = "1.4.2"
-
 # permisssion
 accompanistPermissions = "0.30.1"
 
@@ -49,13 +46,6 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-
-# camera x
-androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraX" }
-androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraX" }
-androidx-camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "cameraX" }
-androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraX" }
-androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraX" }
 
 # tf lite
 tensorflow-lite-task-vision = { group = "org.tensorflow", name = "tensorflow-lite-task-vision", version.ref = "tensorflowLite" }
